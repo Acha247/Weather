@@ -3,13 +3,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- qa
 
 resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: 'QA-$(Build.BuildId)'
 
 stages:
 - stage: Build
