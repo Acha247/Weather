@@ -26,3 +26,5 @@ stages:
         repository: 'anup1999/technofex'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: |
+          qa-$(tag)
