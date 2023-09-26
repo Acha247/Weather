@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 variables:
-  tag: 'QA-$(Build.BuildId)'
+  tag: 'Main-$(Build.BuildId)'
 
 stages:
 - stage: Build
