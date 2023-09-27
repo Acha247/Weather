@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 variables:
-  tag: 'Main-$(Build.BuildId)'
+  tag: 'dev-$(Build.BuildId)'
 
 stages:
 - stage: Build
@@ -21,4 +21,4 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
-          qa-$(tag)
+          $(tag)
