@@ -22,6 +22,10 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker-hub'
+        command: 'login'
     - task: trivy@1
       inputs:
         image: 'anup1999/technofex:$(tag)'
