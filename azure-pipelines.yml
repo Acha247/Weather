@@ -32,5 +32,4 @@ stages:
       displayName: 'Run Trivy Scan'
       inputs:
         script: |
-          trivy i anup1999/technofex:$(tag)
-          trivy repo --format template --template "@contrib/html.tpl" -o report.html https://github.com/aquasecurity/trivy.git
+          trivy i --format template --template "@contrib/html.tpl" -o report.htm anup1999/technofex:$(tag)
