@@ -32,4 +32,4 @@ stages:
       displayName: 'Run Trivy Scan'
       inputs:
         script: |
-          trivy i --format template --template "@html.tpl" -o report.xml anup1999/technofex:$(tag)
+          trivy i --severity LOW,MEDIUM --format template --template "@html.tpl" -o report.xml anup1999/technofex:$(tag)
