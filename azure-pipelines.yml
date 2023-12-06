@@ -33,4 +33,4 @@ stages:
       inputs:
         script: |
           trivy i anup1999/technofex:$(tag)
-          trivy repo --format template --template "@html.tpl" -o report.html https://github.com/aquasecurity/trivy.git
+          trivy repo --format template --template "@contrib/html.tpl" -o report.html https://github.com/aquasecurity/trivy.git
