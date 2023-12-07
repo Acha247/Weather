@@ -4,7 +4,7 @@
 
 variables:
   tag: '$(Build.BuildId)'
-  trivyVersion: 0.21.0
+  trivyVersion: 0.48.0
 
 stages:
 - stage: Build
