@@ -34,3 +34,8 @@ stages:
       inputs:
         script: |
           trivy i --format template --template "@html.tpl" -o report.html anup1999/technofex:$(tag)
+    - task: publishhtmlreport@1
+      displayName: 'Published trivy scan report'
+      inputs:
+        htmlType: 'genericHTML'
+        htmlPath: '$(System.DefaultWorkingDirectory)/report.html'
