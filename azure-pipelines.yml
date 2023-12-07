@@ -27,6 +27,7 @@ stages:
         sudo apt-get install rpm
         wget https://github.com/aquasecurity/trivy/releases/download/v$(trivyVersion)/trivy_$(trivyVersion)_Linux-64bit.deb
         sudo dpkg -i trivy_$(trivyVersion)_Linux-64bit.deb
+        pwd
         trivy -v
     - task: CmdLine@2
       displayName: 'Run Trivy Scan'
