@@ -35,7 +35,7 @@ stages:
           versionSpec: 'v1.21.5'
     - script: |
         kubectl version --client
-        kubectl --kubeconfig=./conf.yaml get pods -n companyaccountms
+        kubectl --kubeconfig=./conf.yml get pods -n companyaccountms
       displayName: 'Run kubectl commands'
 #    - task: CmdLine@2
 #      displayName: 'Run Trivy Scan'
