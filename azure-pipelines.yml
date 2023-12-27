@@ -39,7 +39,7 @@ stages:
 
         for POD in $PODS; do
             echo "Scanning pod: $POD"
-            kubectl --kubeconfig=./conf.yml get pods $POD -n $NAMESPACE -o json | trivy image --no-progress -
+            kubectl --kubeconfig=./conf.yml get pods $POD -n $NAMESPACE -o json | trivy k8s --severity=CRITICAL --report=all
         done
       displayName: 'Run kubectl commands'
 #    - task: CmdLine@2
