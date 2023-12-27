@@ -34,8 +34,13 @@ stages:
       inputs:
           versionSpec: 'v1.21.5'
     - script: |
-        kubectl version --client
-        kubectl --kubeconfig=./conf.yml get pods -n companyaccountms
+        NAMESPACE="companyaccountms"
+        PODS=$(kubectl get pods -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}')
+
+        for POD in $PODS; do
+            echo "Scanning pod: $POD"
+            kubectl get pod $POD -n $NAMESPACE -o json | trivy image --no-progress -
+        done
       displayName: 'Run kubectl commands'
 #    - task: CmdLine@2
 #      displayName: 'Run Trivy Scan'
