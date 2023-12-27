@@ -15,27 +15,31 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
+#    - task: Docker@2
+#      inputs:
+#        containerRegistry: 'Docker-hub'
+#        repository: 'anup1999/technofex'
+#        command: 'buildAndPush'
+#        Dockerfile: '**/Dockerfile'
+#        tags: |
+#          $(tag)
+#    - script: |
+#        sudo apt-get install rpm
+#        wget https://github.com/aquasecurity/trivy/releases/download/v$(trivyVersion)/trivy_$(trivyVersion)_Linux-64bit.deb
+#        sudo dpkg -i trivy_$(trivyVersion)_Linux-64bit.deb
+#        pwd
+#        trivy -v
+    - task: KubectlInstaller@0
+      displayName: 'Install kubectl'
       inputs:
-        containerRegistry: 'Docker-hub'
-        repository: 'anup1999/technofex'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: |
-          $(tag)
-    - script: |
-        sudo apt-get install rpm
-        wget https://github.com/aquasecurity/trivy/releases/download/v$(trivyVersion)/trivy_$(trivyVersion)_Linux-64bit.deb
-        sudo dpkg -i trivy_$(trivyVersion)_Linux-64bit.deb
-        pwd
-        trivy -v
-    - task: CmdLine@2
-      displayName: 'Run Trivy Scan'
-      inputs:
-        script: |
-          trivy i --format template --template "@html.tpl" -o report.html anup1999/technofex:$(tag)
-    - task: publishhtmlreport@1
-      displayName: 'Published trivy scan report'
-      inputs:
-        htmlType: 'genericHTML'
-        htmlPath: '$(System.DefaultWorkingDirectory)/report.html'
+          versionSpec: 'v1.21.5'
+#    - task: CmdLine@2
+#      displayName: 'Run Trivy Scan'
+#      inputs:
+#         script: |
+#          trivy i --format template --template "@html.tpl" -o report.html anup1999/technofex:$(tag)
+#    - task: publishhtmlreport@1
+#      displayName: 'Published trivy scan report'
+#      inputs:
+#        htmlType: 'genericHTML'
+#        htmlPath: '$(System.DefaultWorkingDirectory)/report.html'
