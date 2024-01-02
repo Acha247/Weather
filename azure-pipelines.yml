@@ -1,7 +1,6 @@
 ## Docker
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 variables:
   tag: '$(Build.BuildId)'
   trivyVersion: 0.48.0
@@ -38,7 +37,8 @@ stages:
         secureFile: 'qa-cluster-az.yaml'
     - task: Kubernetes@1
       inputs:
-        connectionType: 'qa-cluster'
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'qa-cluster'
         namespace: 'companyaccountms'
         command: 'useContext'
     - script: |
