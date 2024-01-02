@@ -45,7 +45,7 @@ stages:
           pod_name=$(kubectl get pod -n companyaccountms -o=jsonpath='{.items[0].metadata.name}')
           container_image=$(kubectl get pod -n companyaccountms $pod_name -o=jsonpath='{.spec.containers[0].image}')
           trivy image --config $(Agent.TempDirectory)/_DownloadConfigFile/qa-cluster-az.yaml $container_image
-    displayName: 'Run Trivy Scan'
+      displayName: 'Run Trivy Scan'
 #    - script: |
        # PODS=$(kubectl --kubeconfig $KUBECONFIG get pods -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}')
 
