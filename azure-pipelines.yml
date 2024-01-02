@@ -38,7 +38,7 @@ stages:
         secureFile: 'qa-cluster-az.yaml'
     - task: Kubernetes@1
       inputs:
-        connectionType: 'Kubernetes Service Connection'
+        connectionType: 'qa-cluster'
         namespace: 'companyaccountms'
         command: 'useContext'
     - script: |
