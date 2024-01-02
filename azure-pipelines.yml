@@ -36,16 +36,24 @@ stages:
     - task: DownloadSecureFile@1
       inputs:
         secureFile: 'qa-cluster-az.yaml'
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        namespace: 'companyaccountms'
+        command: 'useContext'
     - script: |
-        export KUBECONFIG=~/.kube/config
-        NAMESPACE="companyaccountms"
-        PODS=$(kubectl --kubeconfig $KUBECONFIG get pods -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}')
+          pod_name=$(kubectl get pod -n companyaccountms -o=jsonpath='{.items[0].metadata.name}')
+          container_image=$(kubectl get pod -n companyaccountms $pod_name -o=jsonpath='{.spec.containers[0].image}')
+          trivy image --config $(Agent.TempDirectory)/_DownloadConfigFile/qa-cluster-az.yaml $container_image
+    displayName: 'Run Trivy Scan'
+#    - script: |
+       # PODS=$(kubectl --kubeconfig $KUBECONFIG get pods -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}')
 
-        for POD in $PODS; do
-            echo "Scanning pod: $POD"
-            kubectl --kubeconfig $KUBECONFIG get pods $POD -n $NAMESPACE -o json | trivy k8s --kubeconfig $KUBECONFIG --report=summary pods
-        done
-      displayName: 'Run kubectl commands'
+       # for POD in $PODS; do
+       #     echo "Scanning pod: $POD"
+       #     kubectl --kubeconfig $KUBECONFIG get pods $POD -n $NAMESPACE -o json | trivy k8s --kubeconfig $KUBECONFIG --report=summary pods
+       # done
+      #displayName: 'Run kubectl commands'
 #    - task: CmdLine@2
 #      displayName: 'Run Trivy Scan'
 #      inputs:
