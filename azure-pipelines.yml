@@ -40,7 +40,7 @@ stages:
         connectionType: 'Kubernetes Service Connection'
         kubernetesServiceEndpoint: 'qa-cluster'
         namespace: 'companyaccountms'
-        command: 'useContext'
+        command: 'useConfiguration'
     - script: |
           pod_name=$(kubectl get pod -n companyaccountms -o=jsonpath='{.items[0].metadata.name}')
           container_image=$(kubectl get pod -n companyaccountms $pod_name -o=jsonpath='{.spec.containers[0].image}')
