@@ -3,6 +3,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 variables:
   tag: 'dev-$(Build.BuildId)'
+  gitHubRepo: 'https://github.com/Anup-Neupane/dot-net.git'
+  gitUsername: 'Anup-Neupane'
+  gitPAT: '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'
 stages:
 - stage: Build
   displayName: Build image
@@ -12,11 +15,14 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'Docker-hub'
-        repository: 'anup1999/technofex'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: |
-          $(tag)
+#    - task: Docker@2
+#      inputs:
+#        containerRegistry: 'Docker-hub'
+#        repository: 'anup1999/technofex'
+#        command: 'buildAndPush'
+#        Dockerfile: '**/Dockerfile'
+#        tags: |
+#          $(tag)
+    - script: |
+        git clone https://$(gitUsername):$(gitPAT)@github.com/Anup-Neupane/dot-net.git cloned_repo
+    
