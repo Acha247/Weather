@@ -27,7 +27,8 @@ stages:
     - script: |
         git clone https://$(gitUsername):$(gitPAT)@github.com/Anup-Neupane/dot-net.git cloned_repo
         cd cloned_repo
-        sed -i 's/image:.*$/image: $(dockerRepository):$(tag)/' deployment.yaml
+        ls
+        sed -i 's|image:.*$|image: $(dockerRepository):$(tag)|' deployment.yaml
         git config --global user.email "azure-pipeline@example.com"
         git config --global user.name "Azure Pipeline"
         git add deployment.yaml
