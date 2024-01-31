@@ -2,9 +2,7 @@
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 variables:
-  tag: '$(Build.BuildId)'
-  trivyVersion: 0.48.0
-
+  tag: 'dev-$(Build.BuildId)'
 stages:
 - stage: Build
   displayName: Build image
@@ -14,53 +12,11 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-#    - task: Docker@2
-#      inputs:
-#        containerRegistry: 'Docker-hub'
-#        repository: 'anup1999/technofex'
-#        command: 'buildAndPush'
-#        Dockerfile: '**/Dockerfile'
-#        tags: |
-#          $(tag)
-    - script: |
-        sudo apt-get install rpm
-        wget https://github.com/aquasecurity/trivy/releases/download/v$(trivyVersion)/trivy_$(trivyVersion)_Linux-64bit.deb
-        sudo dpkg -i trivy_$(trivyVersion)_Linux-64bit.deb
-#        pwd
-#        trivy -v
-    - task: KubectlInstaller@0
-      displayName: 'Install kubectl'
+    - task: Docker@2
       inputs:
-          versionSpec: 'v1.21.5'
-    - task: DownloadSecureFile@1
-      inputs:
-        secureFile: 'qa-cluster-az.yaml'
-    - task: Kubernetes@1
-      inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceEndpoint: 'qa-cluster'
-        namespace: 'companyaccountms'
-        command: 'set'
-    - script: |
-          pod_name=$(kubectl get pod -n companyaccountms -o=jsonpath='{.items[0].metadata.name}')
-          container_image=$(kubectl get pod -n companyaccountms $pod_name -o=jsonpath='{.spec.containers[0].image}')
-          trivy image --config $(Agent.TempDirectory)/_DownloadConfigFile/qa-cluster-az.yaml $container_image
-      displayName: 'Run Trivy Scan'
-#    - script: |
-       # PODS=$(kubectl --kubeconfig $KUBECONFIG get pods -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}')
-
-       # for POD in $PODS; do
-       #     echo "Scanning pod: $POD"
-       #     kubectl --kubeconfig $KUBECONFIG get pods $POD -n $NAMESPACE -o json | trivy k8s --kubeconfig $KUBECONFIG --report=summary pods
-       # done
-      #displayName: 'Run kubectl commands'
-#    - task: CmdLine@2
-#      displayName: 'Run Trivy Scan'
-#      inputs:
-#         script: |
-#          trivy i --format template --template "@html.tpl" -o report.html anup1999/technofex:$(tag)
-#    - task: publishhtmlreport@1
-#      displayName: 'Published trivy scan report'
-#      inputs:
-#        htmlType: 'genericHTML'
-#        htmlPath: '$(System.DefaultWorkingDirectory)/report.html'
+        containerRegistry: 'Docker-hub'
+        repository: 'anup1999/technofex'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(tag)
