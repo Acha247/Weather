@@ -4,6 +4,7 @@
 variables:
   tag: 'dev-$(Build.BuildId)'
   gitHubRepo: 'https://github.com/Anup-Neupane/dot-net.git'
+  dockerRepository: 'anup1999/technofex'
   gitUsername: 'Anup-Neupane'
   gitPAT: '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'
 stages:
@@ -15,14 +16,23 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-#    - task: Docker@2
-#      inputs:
-#        containerRegistry: 'Docker-hub'
-#        repository: 'anup1999/technofex'
-#        command: 'buildAndPush'
-#        Dockerfile: '**/Dockerfile'
-#        tags: |
-#          $(tag)
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker-hub'
+        repository: 'anup1999/technofex'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(tag)
     - script: |
         git clone https://$(gitUsername):$(gitPAT)@github.com/Anup-Neupane/dot-net.git cloned_repo
+        cd cloned_repo
+        sed -i 's/image:.*$/image: $(dockerRepository):$(tag)/' deployment.yaml
+        git config --global user.email "azure-pipeline@example.com"
+        git config --global user.name "Azure Pipeline"
+        git add deployment.yaml
+        git commit -m "Update Docker tag in deployment.yaml via Azure Pipeline"
+        git remote set-url origin https://$(gitUsername):$(gitPAT)@github.com/Anup-Neupane/dot-net
+        git push
+
     
