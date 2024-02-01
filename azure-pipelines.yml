@@ -5,8 +5,8 @@ variables:
   tag: 'dev-$(Build.BuildId)'
   gitHubRepo: 'https://github.com/Anup-Neupane/dot-net.git'
   dockerRepository: 'anup1999/technofex'
-  gitUsername: 'Anup-Neupane'
-  gitPAT: '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'
+ # gitUsername: 'Anup-Neupane'
+ # gitPAT: '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'
 stages:
 - stage: Build
   displayName: Build image
