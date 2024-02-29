@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\WebApplication-apii\\WebApplication-apii.csproj": {}
+    "C:\\Users\\Acha - PC\\Desktop\\Weather C# proj\\Technofex Training Project\\WebApplication-apii.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\WebApplication-apii\\WebApplication-apii.csproj": {
+    "C:\\Users\\Acha - PC\\Desktop\\Weather C# proj\\Technofex Training Project\\WebApplication-apii.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\WebApplication-apii\\WebApplication-apii.csproj",
+        "projectUniqueName": "C:\\Users\\Acha - PC\\Desktop\\Weather C# proj\\Technofex Training Project\\WebApplication-apii.csproj",
         "projectName": "WebApplication-apii",
-        "projectPath": "C:\\Users\\User\\source\\repos\\WebApplication-apii\\WebApplication-apii.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\WebApplication-apii\\obj\\",
+        "projectPath": "C:\\Users\\Acha - PC\\Desktop\\Weather C# proj\\Technofex Training Project\\WebApplication-apii.csproj",
+        "packagesPath": "C:\\Users\\Acha - PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Acha - PC\\Desktop\\Weather C# proj\\Technofex Training Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Acha - PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,6 +58,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.15, 7.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.15, 7.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.15, 7.0.15]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.15, 7.0.15]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -68,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
